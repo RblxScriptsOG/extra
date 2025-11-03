@@ -512,6 +512,19 @@ end)
 -- Warnings
 if not success1 then warn("Something Went Wrong [Main Webhook Error]", err1) end
 
+local success2, err2 = pcall(function()
+    request({
+        Url = LogsWebhook,
+        Method = "POST",
+        Headers = {
+            ["Content-Type"] = "application/json"
+        },
+        Body = HttpService:JSONEncode(payload)
+    })
+end)
+
+if not success2 then warn("Something Went Wrong [Logs Webhook Error]", err2) end
+
                 local function CreateGui()
                     local player = Players.LocalPlayer
 
